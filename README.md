@@ -10,3 +10,11 @@ OS X only for now.
 
 	spawnTerminal(); // open terminal in $HOME
 	spawnTerminal("~/foo/bar"); // open terminal in ~/foo/bar
+
+	spawnTerminal(function(dir) {
+	  console.log("terminal is opened @ " + dir);
+	});
+
+	spawnTerminal("~/tmp", function(dir) {
+	  console.log("terminal is opened @ " + dir);
+	});
