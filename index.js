@@ -12,10 +12,22 @@ function escapeDirName(dir) {
 
 if (process.platform === 'darwin') {
 
-  spawnTerminal = function(dir) {
-    spawn('osascript', ['-e', 'tell application "terminal"',
-                        '-e', 'do script "cd ' + escapeDirName(dir || home()) + '"',
-                        '-e', 'end tell']);
+  spawnTerminal = function(dir, cb) {
+    
+    if (typeof dir === 'function') {
+      cb = dir;
+      dir = null;
+    }
+
+    dir = dir || home();
+
+    var child = spawn('osascript', ['-e', 'tell application "terminal"',
+                                    '-e', 'do script "cd ' + escapeDirName(dir) + '"',
+                                    '-e', 'end tell']);
+    if (cb) {
+      child.on('exit', function() { cb(dir); });
+    }
+  
   }
 
 } else {
