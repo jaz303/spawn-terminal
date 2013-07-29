@@ -4,7 +4,7 @@
   "description": "Spawn a terminal in a given directory",
   "main": "index.js",
   "keywords": [
-    "terminal",
+    "terminal"
   ],
   "author": "Jason Frame <jason@onehackoranother.com> (jasonframe.co.uk)",
   "license": "MIT",
