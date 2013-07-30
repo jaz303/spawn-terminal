@@ -30,6 +30,25 @@ if (process.platform === 'darwin') {
   
   }
 
+} else if (process.platform === 'linux') {
+
+  spawnTerminal = function(dir, cb) {
+
+    if (typeof dir === 'function') {
+      cb = dir;
+      dir = null;
+    }
+
+    dir = dir || home();
+
+    var child = spawn('gnome-terminal', ['--working-directory=' + escapeDirName(dir)]);
+
+    if (cb) {
+      child.on('exit', function() { cb(dir); });
+    }
+
+  }
+
 } else {
 
   throw "Sorry, platform '" + process.platform + "' is not yet supported.";
